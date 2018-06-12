@@ -1,0 +1,97 @@
+  https://pl.wikibooks.org/wiki/Asembler_x86/Instrukcje/R%C3%B3%C5%BCne
+  
+   Spis Treści
+1. Kompilacja
+2. Hello World
+3. Typy
+4. Rejestry
+5. Funkcje
+6. Stos (x86)
+7. Rozkazy
+
+----------------------------------------------------
+
+1. Kompilacja
+
+#  To compile: as -o lab_0a.o lab_0a.s
+#  To link:    ld -o lab_0a lab_0a.o
+#  To run:     ./lab_0a
+----------------------------------------------------
+2. Hello World
+
+.equ	stala,0x01	#wartość 1
+
+.data			#od tego momentu deklaracje danych
+zmienna:			
+	.byte	0x00
+    
+.text			#skonczyl sie obszar danych, teraz bedzie kod
+.global _start		# entry point
+start:
+	JMP	_start
+----------------------------------------------------
+3. Typy
+
+.byte  - 1 Bajt
+.word  - 2 Bajty
+.long  - 4 Bajty
+.ascii - String
+----------------------------------------------------
+4. Rejestry
+
+(x86)
+
+EAX - składa sie z AX (pierwsze 16 z prawej), AH i AL (lewa i prawa strona AX)
+ E      AX
+ ============
+ |0012|34|56|
+ ============
+       AH AL
+EBX = BX (BH | BL)
+ECX = CX (CH | CL)
+EDX = DX (DH | DL)
+EBP, ESP - używane w stosie (EBP - początek stosu dla wywołania funkcji, ESP - wskazuje na wierzchołek stosu)
+ESI, EDI
+
+(x64)
+
+RDI	- w 1 6 chyba sa argumenty
+RSI
+RDX
+RCX
+R8
+R9
+RAX
+RBX
+
+LODSB			# al := MEM[ esi ]; esi++	
+STOSB			# MEM[ edi ] := al; edi++	
+----------------------------------------------------
+5. Funkcje
+# CALL funkcja 
+.type funkcja,@function
+funkcja: 
+    XYZ xyz
+    JMP funkcja2
+funkcja2:
+    XYZ xyz
+    RET
+----------------------------------------------------
+6. Stos (x86)
+
+
+
+7. Rozkazy
+----------------------------------------------------
+MOVB arg1,%al   
+MOVW arg2,%ax
+MOVL %eax,result  - przenosi wartość 1 do 2
+
+NOP  - pusty rozkaz
+
+CALL fun  - wywołanie funkcji
+
+XOR	%ebx,%ebx  - wyzerowanie rejestru
+
+ADD	%eax,%ebx  - eax += ebx
+SUB	%eax,%ebx  - eax += ebx	
