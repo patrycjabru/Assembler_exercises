@@ -34,7 +34,7 @@ int main()
   for(i = 0; i < BOK; ++i)
   {
     free(wsk[i]);
-  }
+  } 
   free(wsk);
 
   return 0;
